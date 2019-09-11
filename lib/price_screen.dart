@@ -11,16 +11,17 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen> {
   String selectedCurrency;
-  double valueBTC;
+  String valueBTC = '?';
+  String actualFiat = 'USD';
 
   @override
   void initState() {
     super.initState();
-    getCurrencyData();
+    getCurrencyData('BTC', actualFiat);
   }
 
-  void getCurrencyData() async {
-    var currency = await CurrencyModel().getCurrency('BTC', 'USD');
+  void getCurrencyData(String crypto, String fiat) async {
+    var currency = await CurrencyModel().getCurrency(crypto, fiat);
     updateUI(currency);
   }
 
@@ -49,9 +50,9 @@ class _PriceScreenState extends State<PriceScreen> {
   void updateUI(dynamic currencyData) {
     setState(() {
       if (currencyData == null) {
-        valueBTC = 0.0;
+        valueBTC = '?';
       }
-      valueBTC = currencyData['ask'];
+      valueBTC = currencyData['ask'].toString();
     });
   }
 
@@ -67,19 +68,19 @@ class _PriceScreenState extends State<PriceScreen> {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
-            child: Card(
-              color: Colors.lightBlueAccent,
-              elevation: 5.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Column(
-                children: <Widget>[
-                  Padding(
+            child: Column(
+              children: <Widget>[
+                Card(
+                  color: Colors.lightBlueAccent,
+                  elevation: 5.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Padding(
                     padding:
                         EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                     child: Text(
-                      '1 BTC = $valueBTC USD',
+                      '1 BTC = $valueBTC $actualFiat',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 20.0,
@@ -87,8 +88,46 @@ class _PriceScreenState extends State<PriceScreen> {
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+                Card(
+                  color: Colors.lightBlueAccent,
+                  elevation: 5.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
+                    child: Text(
+                      '1 ETH = $valueBTC $actualFiat',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+                Card(
+                  color: Colors.lightBlueAccent,
+                  elevation: 5.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
+                    child: Text(
+                      '1 LTC = $valueBTC $actualFiat',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           Container(
@@ -100,7 +139,10 @@ class _PriceScreenState extends State<PriceScreen> {
               backgroundColor: Colors.lightBlue,
               itemExtent: 32.0,
               onSelectedItemChanged: (selectedIndex) {
-                print(selectedIndex);
+                setState(() {
+                  actualFiat = currenciesList[selectedIndex];
+                  getCurrencyData('BTC', actualFiat);
+                });
               },
               children: getCurrencyList(),
             ),
