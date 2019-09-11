@@ -14,5 +14,10 @@ A crypto currency price checking app to monitor your bitcoin investments on the 
 - What APIs are and how to use them to get data from the internet.
 - What JSONs are and how to parse them using the Dart convert package.
 
+## TODO
+
+[ ] Fetch current price of bitcoins to dollars.
+[ ] Use scrollview to select any currency and be able to get the value of bitcoin in that currency.
+[ ] Adding prices of BTC, ETH and LTC and select currency to get the value of all this criptocurrencies.
 
 >This is a companion project to The App Brewery's Complete Flutter Development Bootcamp, check out the full course at [www.appbrewery.co](https://www.appbrewery.co/)
