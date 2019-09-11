@@ -16,8 +16,8 @@ A crypto currency price checking app to monitor your bitcoin investments on the 
 
 ## TODO
 
-[ ] Fetch current price of bitcoins to dollars.
-[ ] Use scrollview to select any currency and be able to get the value of bitcoin in that currency.
-[ ] Adding prices of BTC, ETH and LTC and select currency to get the value of all this criptocurrencies.
+- [X] Fetch current price of BTC to USD.
+- [ ] Use scrollview to select any currency and be able to get the value of BTC in that currency.
+- [ ] Adding prices of BTC, ETH and LTC and select currency to get the value of all this cryptos.
 
 >This is a companion project to The App Brewery's Complete Flutter Development Bootcamp, check out the full course at [www.appbrewery.co](https://www.appbrewery.co/)
