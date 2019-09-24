@@ -21,6 +21,9 @@ class _PriceScreenState extends State<PriceScreen> {
   }
 
   void getCurrencyData(String fiat) async {
+    valueBTC = '?';
+    valueETH = '?';
+    valueLTC = '?';
     List<dynamic> currency = await CoinData().getCurrency(fiat);
     updateUI(currency);
   }
@@ -52,9 +55,6 @@ class _PriceScreenState extends State<PriceScreen> {
       valueBTC = currency[0] == null ? '?' : currency[0]['ask'].toString();
       valueETH = currency[1] == null ? '?' : currency[1]['ask'].toString();
       valueLTC = currency[2] == null ? '?' : currency[2]['ask'].toString();
-      print('BTC $valueBTC)');
-      print('ETH $valueETH)');
-      print('LTC $valueLTC)');
     });
   }
 
